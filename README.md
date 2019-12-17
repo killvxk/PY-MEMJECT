@@ -10,7 +10,7 @@
       ./PY-MEMJECT.py <DLL PATH> <process PID>
 ```
 
-![pops calculator](images/success.png)
+![pops calculator](images/dll.gif)
 
 ----
 
