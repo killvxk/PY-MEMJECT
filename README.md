@@ -1,5 +1,5 @@
 ![logo](images/pylogo.png)
-##### PY-MEMJECT: A Windows runtime .DLL injection tool that allows for malicious code to run in another processes memory
+##### PY-MEMJECT: A Windows runtime DLL injection tool that allows for malicious code to run in another processes memory
 ![tweet](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2FSHADEGREEN%2FPY-MEMJECT%2Ftree%2Fmaster)
 [![](https://img.shields.io/badge/python-3-yellow.svg?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
 
