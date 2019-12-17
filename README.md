@@ -10,7 +10,7 @@
       ./PY-MEMJECT.py <DLL PATH> <process PID>
 ```
 
-![pops calculator](https://raw.githubusercontent.com/SHADEGREEN/PY-MEMJECT/master/images/success.png)
+![pops calculator](images/success.png)
 
 ----
 
@@ -29,7 +29,7 @@ Windows API functions process goes as follows:
 
 *Breaking down the Windows API functions:* There are four main steps to injecting a DLL payload into a running processes. The steps are simply to first attach and set up a handler to a running process which will allow us to communicate with it. Secondly you will allocate a space in memory in the host (victim) process that you are injecting. Thirdly, you will inject and copy the .DLL payload into that host processes allocated space. And finally is this all works out, you will get code execution through the victim program.
 
-![image of process](https://raw.githubusercontent.com/SHADEGREEN/PY-MEMJECT/master/images/Dll-injection-createremotethread.png)
+![image of process](images/Dll-injection-createremotethread.png)
 
    1. **OpenProcess()** The full documentation from [Microsoft](https://docs.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-openprocess). Basically it is responsible for setting up access to a process object and returning a handle to us as a means of communication with the process we select.
    2. **VirtualAllocEx()** The full documentation from [Microsoft](https://docs.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualallocex). In the context of DLL injection, this function is responsible for allocating memory space in the victim process. 
