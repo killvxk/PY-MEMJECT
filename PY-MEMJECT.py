@@ -3,7 +3,7 @@ from ctypes import *
 
 def runtime_injection():
 
-    print("\n ---[PY-MEMJECT, Runtime .DLL injection}---\n")
+    print("\n ---{PY-MEMJECT, Runtime .DLL injection}---\n")
     
     dll_name   = sys.argv[1]
     dll_length = len(dll_name)
