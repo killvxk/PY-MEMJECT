@@ -1,7 +1,7 @@
 import sys
 from ctypes import *
 
-def reflective_injection():
+def runtime_injection():
 
     print("\n ---[PY-MEMJECT, Runtime .DLL injection}---\n")
     
@@ -76,4 +76,4 @@ def reflective_injection():
     print("[+] Successful injection into PID: %s" %PID)
     
 if __name__ == '__main__':
-    reflective_injection()
+    runtime_injection()
